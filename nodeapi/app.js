@@ -3,12 +3,12 @@ const app = express()
 const morgan = require('morgan')
 const dotenv = require('dotenv')
 const mongoose = require('mongoose')
+const bodyParser = require('body-parser')
 
 dotenv.config()
 
-
 //db
-mongoose.connect(process.env.MONGO_URI, { useNewURLParser: true , uri_decode_auth: true }).then(() => {console.log('db connected')})
+mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true }).then(() => {console.log('db connected')})
 
 mongoose.connection.on("error", err => {
   console.log(`db connection error: ${err.message}`)
@@ -26,9 +26,12 @@ const myOwnMiddleware = (req, res, next) => {
 }
 
 //use middle ware
-app.use(morgan('dev'))
-app.use(myOwnMiddleware)
-app.use('/', postRoutes)
+app.use(morgan('dev'));
+app.use(myOwnMiddleware);
+app.use(bodyParser.json());
+app.use('/', postRoutes);
+// app.use(bodyParser.urlencoded({ extended: true }));
+
 
 const port = process.env.PORT || 8080
 app.listen(port, () => {
