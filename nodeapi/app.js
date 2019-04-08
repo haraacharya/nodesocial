@@ -4,6 +4,7 @@ const morgan = require('morgan')
 const dotenv = require('dotenv')
 const mongoose = require('mongoose')
 const bodyParser = require('body-parser')
+const expressValidator = require('express-validator')
 
 dotenv.config()
 
@@ -28,6 +29,7 @@ const myOwnMiddleware = (req, res, next) => {
 //use middle ware
 app.use(morgan('dev'));
 app.use(myOwnMiddleware);
+app.use(expressValidator());
 app.use(bodyParser.json());
 app.use('/', postRoutes);
 // app.use(bodyParser.urlencoded({ extended: true }));
