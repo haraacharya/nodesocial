@@ -20,6 +20,7 @@ mongoose.connection.on("error", err => {
 //const postRoutes = require('./routes/post')
 //Or use object destructuring
 const postRoutes = require('./routes/post')
+const authRoutes = require('./routes/auth')
 
 const myOwnMiddleware = (req, res, next) => {
   console.log("my own middleware")
@@ -32,6 +33,7 @@ app.use(myOwnMiddleware);
 app.use(expressValidator());
 app.use(bodyParser.json());
 app.use('/', postRoutes);
+app.use('/', authRoutes)
 // app.use(bodyParser.urlencoded({ extended: true }));
 
 
