@@ -33,14 +33,23 @@ signupValidator = (req, res, next) => {
   req.check("name")
   .isLength({min: 4})
   .withMessage("Name should be atleast 4 characters")
+
+  //check for email
+  req.check("email")
+  .matches(/[A-Z0-9._%+-]+@[A-Z0-9.-]+.[A-Z]{2,4}/)
+  .withMessage("Type correct email!")
+  .isLength({
+    min: 40,
+    max: 3000
+  })
+  .withMessage("email should be min 4 and max 3000 characters long!")
+
+  //check for password
   req.check("password")
   .isLength({min: 6})
   .withMessage("Password should have minimum 6 characters")
   .matches(/\d/)
   .withMessage("Password should contain atleast a number")
-  //check for email
-
-  //check for password
 
   //check for errors
   const errors = req.validationErrors()
