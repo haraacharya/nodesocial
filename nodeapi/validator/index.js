@@ -36,10 +36,10 @@ signupValidator = (req, res, next) => {
 
   //check for email
   req.check("email")
-  .matches(/[A-Z0-9._%+-]+@[A-Z0-9.-]+.[A-Z]{2,4}/)
+  .matches(/\S+@\S+\.\S+/)
   .withMessage("Type correct email!")
   .isLength({
-    min: 40,
+    min: 4,
     max: 3000
   })
   .withMessage("email should be min 4 and max 3000 characters long!")
