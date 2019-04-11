@@ -34,8 +34,10 @@ signin = (req, res) => {
     //persist the token as t in cokie with expirydate
     res.cookie("t", token, {expire: new Date() + 9999})
     //return response with user and token to frontend
-    const {_id, email, name} = user
-    return res.json({token, user: {_id, name, email}})
+    // const {_id, email, name} = user
+    // return res.json({token, user: {_id, name, email}})
+    //or directly return user array required fields as below
+    return res.json({token, user: [user._id, user.name, user.email]})
   })
 }
 
